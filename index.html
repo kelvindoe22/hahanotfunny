@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wanna hear a bad joke?">
+  <meta name="robots" content="travel,follow">
+  <title>Bad Jokes | Home</title>
+  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="icon" href="img/K.svg">
+</head>
+<body>
+  <section id="head">
+    <div class="header">
+      <a class="link" href="#bottom">Submit Joke</a>
+      <h1 class="title">BAD JOKES</h1>
+    </div>
+    <p class="wow">  </p>
+    
+    <br>
+    <textarea readonly class="test" style="white-space:pre-wrap"></textarea>
+
+    <button class="aaa">Joke please.</button>
+  </section>
+  <section id ="bottom">
+    <div class="btm">
+      <h1 class="title">Submit Joke</h1>
+    </div>
+    <input type="text" class="name" id="name" name="name" placeholder="Your name goes here.">
+    <div class="edit">
+      <textarea class="joke" placeholder="Joke goes here"></textarea>
+    </div>
+    <button class="submit">Submit Joke</button>
+  </section>
+</body>
+<script>
+  // i am a rust, python programmer i do not care about your javascript criticisms
+  function k (a,b) {
+    document.querySelector(".test").value = a;
+    document.querySelector(".wow").innerHTML = "Joke by <span>" + b+"</span>";
+  }
+
+  function clearstuff(){
+    document.querySelector(".joke").value = "";
+    document.querySelector(".name").value = "";
+    alert("Sent successfully")
+  }
+
+  document.querySelector(".aaa").addEventListener("click",
+  function(){
+    fetch("https://badjoke.herokuapp.com/tellme")
+    .then(data => data.json())
+    .then(b => k(b["joke"],b["author"]))
+  }
+  )
+
+  document.querySelector(".submit").addEventListener("click",
+  function(){
+    let name = document.querySelector(".name").value;
+    let joke = document.querySelector(".joke").value;
+    if (joke.trim() == "" ||name.trim() == "") {
+      alert("field cannot be empty");
+      return;
+    }
+
+    let data = {
+      "name":name, 
+      "joke":joke
+    }
+    fetch('https://badjoke.herokuapp.com/igotone', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(_ => clearstuff());
+  }
+  )
+
+
+</script>
+</html>

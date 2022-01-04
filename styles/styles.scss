@@ -1,0 +1,16 @@
+$p-text: 1.5rem;
+
+@font-face {
+    font-family: "Pushter";
+    src: url(fonts/Pushster-Regular.ttf);
+}
+
+@font-face {
+    font-family: "RSlab";
+    src: url(fonts/RobotoSlab-VariableFont_wght.ttf);
+}
+
+
+@import "global";
+@import "main";
+@import "about";
